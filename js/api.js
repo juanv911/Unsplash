@@ -68,6 +68,7 @@
         });
         $(document).on('click', '.dropdown a', function(e) {
             e.preventDefault();
+            $("#unsplash").masonry( 'destroy' );
             $("#unsplash,#more").empty();
             filter = $(this).attr("href");
             unsplash(1, filter);
