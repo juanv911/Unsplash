@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Unsplash API</title>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <body>
+      <div class="top">
+        <ul>
+          <li><a class="logo" href="#"><i class="fa fa-camera"></i>Unsplash <strong>API</strong></a></li>
+        </ul>
+      </div>
+      <div class="message_holder">
+        <div class="message">
+          <span>Unsplash: Free (do whatever you want) high-resolution photos.</span>
+          <div class="dropdown">
+            <button class="dropbtn">FILTER BY</button>
+            <div class="dropdown-content">
+              <a href="latest">Latest</a>
+              <a href="popular">Popular</a>
+              <a href="oldest">Oldest</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container" >
+        <div id="unsplash" >
+        </div>
+        <div id="more">
+          <a class="more"><span>...</span></a>
+          </div> 
+      </div>
+    </body>
+    <script src='js/jquery.min.js'></script>
+    <script src='js/jquery.masonry.js'></script>
+    <script src='js/imagesloaded.pkgd.js'></script>
+    <script src="js/api.js"></script>
+    <script>
+      $('#unsplash').unsplash({
+        client_id:'UNSPLASH-CLIENT_ID-HERE',
+        limit:20,
+        width:500
+      });
+    </script>
+  </body>
+</html>
