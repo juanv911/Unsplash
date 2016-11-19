@@ -4,6 +4,7 @@
         var defaults = {
             client_id: '',
             limit: '',
+            columns: '',
             width: ''
         };
         var settings = $.extend({}, defaults, options);
@@ -32,22 +33,23 @@
                 },
                 success: function(data) {
                     $.each(data, function(i, item) {
+                        var containerWidth = $(".container").width();
                         //Aspect Ratio
                         var width = item.width;
                         var height = item.height;
-                        var new_height = Math.round((height / width) * settings.width);
+                        var item_width = $(".item").width();
+                        var new_height = Math.round((height / width) * containerWidth/settings.columns);
                         //Set custom width
                         var image_url = item.urls.small.replace("&w=400", "&w=" + settings.width);
-                        var image = $("<img>").attr("src", image_url);
-                        var link = $("<a target='_blank'>").attr("href", item.links.html).append(image).css({"height": new_height});
+                        var image = $("<img>").attr("src", image_url).hide();
+                        image.fadeToggle("slow");
+                        var link = $("<a class='link' target='_blank'>").attr("href", item.links.html).append(image).css({"height": new_height, "background-color":item.color});
                         var name = $("<p>").append("By ", item.user.name);
-                        var item = $("<div class='item'>").append(link, name).hide();
+                        var item = $("<div class='item'>").append(link, name).css({"width": containerWidth/settings.columns});
                         var $container = $('#unsplash');
                         //Append item to Masonry
-                        $container.append(item).imagesLoaded(function() {
-                            item.fadeIn();
-                            $container.masonry('appended', item).masonry();
-                        });
+                        var $item = $(item);
+                        $container.append( $item ).masonry().masonry( 'appended', $item );
                     });
                     //Set page number value in MORE button
                     var more = $("<a class='more'>").attr("href", page).html("<span>...</span>");
